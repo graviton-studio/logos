@@ -1,6 +1,6 @@
 # Logos AI Platform
 
-![design](assests/design.png)
+<img src="assests/design.png" alt="design" width="600"/>
 
 A complete AI agent platform that lets users create, deploy, and manage intelligent agents with real-world integrations. Built with a microservices architecture using Next.js, Python, and the Model Context Protocol (MCP).
 
@@ -246,6 +246,6 @@ This platform is designed to make AI agents actually useful in the real world. E
 
 ## Demo
 
-![integrations](assests/intergrations.png)
-![workflow](assests/workflow.png)
-![agents](assests/agents.png)
+<img src="assests/workflow.png" alt="workflow" width="600"/>
+<img src="assests/agents.png" alt="agents" width="600"/>
+<img src="assests/intergrations.png" alt="integrations" width="600"/>
