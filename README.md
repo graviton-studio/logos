@@ -1,5 +1,7 @@
 # Logos AI Platform
 
+![design](assests/design.png)
+
 A complete AI agent platform that lets users create, deploy, and manage intelligent agents with real-world integrations. Built with a microservices architecture using Next.js, Python, and the Model Context Protocol (MCP).
 
 ## What Is This?
@@ -39,7 +41,9 @@ Our system is built with several key components that work together:
 This monorepo contains three main applications:
 
 ### 🖥️ **logos-frontend** - Web Interface
+
 The main user interface built with Next.js 14. This is where users:
+
 - Create and configure AI agents
 - Chat with their agents in real-time
 - Manage integrations with external services
@@ -49,7 +53,9 @@ The main user interface built with Next.js 14. This is where users:
 **Role**: Layer 1 + Agent Builder from architecture diagram
 
 ### 🔌 **logos-I** - Integration Gateway (MCP Server)
+
 The backend service that handles all external integrations. This Python server:
+
 - Manages OAuth tokens and API authentication
 - Provides tools for Gmail, Slack, Google Drive, Airtable, etc.
 - Uses the Model Context Protocol for clean agent communication
@@ -59,7 +65,9 @@ The backend service that handles all external integrations. This Python server:
 **Role**: MCP Gateway Server + Individual Integration Servers from architecture diagram
 
 ### 🧪 **logos-sandbox** - Testing Environment
+
 The development and testing environment where agents are validated before deployment:
+
 - Test agent workflows safely without affecting real data
 - Debug agent behavior with comprehensive logging
 - Prototype new features and integrations
@@ -122,18 +130,21 @@ Visit `http://localhost:3000` to see the application.
 ## How It All Works Together
 
 ### Agent Creation Flow
+
 1. **User describes agent** in the frontend → "I want an agent that summarizes my daily emails"
 2. **Frontend parses intent** → Identifies goal, constraints, required integrations (Gmail)
 3. **Agent configuration saved** → Stored in database with workflow definition
 4. **User connects Gmail** → OAuth flow handled by frontend, tokens stored securely
 
 ### Agent Execution Flow
+
 1. **User triggers agent** → Through chat interface or scheduled trigger
 2. **Frontend requests execution** → Sends agent config + user context
 3. **Integration gateway called** → Retrieves user's Gmail emails using stored OAuth tokens
 4. **Results returned** → Email summaries displayed in chat interface
 
 ### Testing and Development
+
 1. **New integration developed** → Created in logos-I with proper MCP tools
 2. **Testing in sandbox** → Validated with test workflows and mock data
 3. **Frontend integration** → UI components added for new integration
@@ -141,27 +152,29 @@ Visit `http://localhost:3000` to see the application.
 
 ## Available Integrations
 
-| Service | What It Does | OAuth Required |
-|---------|-------------|----------------|
-| **Gmail** | Read, send, search emails | Yes |
-| **Google Calendar** | Create events, check availability | Yes |
-| **Google Drive** | Upload, download, search files | Yes |
-| **Google Sheets** | Read, write spreadsheet data | Yes |
-| **Slack** | Send messages, read channels | Yes |
-| **Airtable** | Query databases, create records | API Key |
-| **Exa Search** | Semantic web search | API Key |
+| Service             | What It Does                      | OAuth Required |
+| ------------------- | --------------------------------- | -------------- |
+| **Gmail**           | Read, send, search emails         | Yes            |
+| **Google Calendar** | Create events, check availability | Yes            |
+| **Google Drive**    | Upload, download, search files    | Yes            |
+| **Google Sheets**   | Read, write spreadsheet data      | Yes            |
+| **Slack**           | Send messages, read channels      | Yes            |
+| **Airtable**        | Query databases, create records   | API Key        |
+| **Exa Search**      | Semantic web search               | API Key        |
 
 ## Development Workflow
 
 ### Adding a New Integration
 
 1. **Create integration in logos-I**
+
    ```bash
    cd logos-I/integrations
    # Create new_service.py with OAuth and tools
    ```
 
 2. **Add to tool registry**
+
    ```python
    # In logos-I/tools/__init__.py
    from .new_service import register_tools
@@ -169,6 +182,7 @@ Visit `http://localhost:3000` to see the application.
    ```
 
 3. **Add frontend UI**
+
    ```bash
    cd logos-frontend/src/components/integrations
    # Create integration button and OAuth flow
@@ -184,6 +198,7 @@ Visit `http://localhost:3000` to see the application.
 ### Debugging Issues
 
 Each component has comprehensive logging:
+
 - **Frontend**: Browser dev tools + Next.js logs
 - **Integration Gateway**: Python logs with request/response details
 - **Sandbox**: Detailed execution traces and performance metrics
@@ -199,11 +214,13 @@ Each component has comprehensive logging:
 ## Deployment
 
 ### Development
+
 - Frontend: `npm run dev` (localhost:3000)
 - Gateway: `python main.py` (localhost:8080)
 - Database: Supabase hosted or local instance
 
 ### Production
+
 - Frontend: Deploy to Vercel, Netlify, or similar
 - Gateway: Deploy to Railway, Render, or container platform
 - Database: Managed Supabase instance
@@ -225,4 +242,10 @@ Each repository has its own contribution guidelines, but generally:
 - **Testing problems**: Check logos-sandbox README and execution logs
 - **Architecture questions**: Review this README and the individual component docs
 
-This platform is designed to make AI agents actually useful in the real world. Each component plays a crucial role in making that happen - from the user-friendly interface to the robust integration handling to the comprehensive testing environment. 
+This platform is designed to make AI agents actually useful in the real world. Each component plays a crucial role in making that happen - from the user-friendly interface to the robust integration handling to the comprehensive testing environment.
+
+## Demo
+
+![integrations](assests/intergrations.png)
+![workflow](assests/workflow.png)
+![agents](assests/agents.png)
