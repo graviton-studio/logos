@@ -1,0 +1,97 @@
+# Product Requirements Document: Persistent Chat Histories
+
+## 1. Overview
+Add basic persistent chat history functionality to the existing Logos Frontend chat system, allowing users to save and retrieve their conversation sessions with the AI assistant.
+
+## 2. Current System Analysis
+- **Tech Stack**: Next.js 15, React 19, TypeScript, Supabase, AI SDK
+- **Current Chat System**: Uses `@ai-sdk/react` useChat hook with UIMessage types
+- **Message Structure**: Complex messages with parts (text, reasoning, tool-invocation, source, file)
+- **User System**: Supabase Auth with existing user profiles
+- **Database**: PostgreSQL via Supabase with existing user table
+
+## 3. Core Requirements
+
+### 3.1 Database Schema
+Create single table to support chat persistence:
+
+**chat_messages table:**
+- id (UUID, primary key)
+- user_id (UUID, foreign key to users table)
+- session_id (UUID) - groups messages into conversations
+- message_id (text) - the original AI SDK message ID
+- role (text) - user, assistant, system
+- content (text, nullable) - simple text content for basic messages
+- parts (jsonb, nullable) - complex message parts (tool calls, reasoning, etc.)
+- timestamp (timestamptz)
+- sequence_number (integer) - message order within session
+- created_at (timestamptz)
+
+### 3.2 API Endpoints
+- GET /api/chat/sessions - List user's recent chat sessions (grouped by session_id)
+- GET /api/chat/sessions/[sessionId] - Get specific session with all messages
+- POST /api/chat/sessions/[sessionId]/messages - Save messages to session
+- DELETE /api/chat/sessions/[sessionId] - Delete entire session
+
+### 3.3 Frontend Components
+- Simple chat history list showing recent conversations
+- Ability to load previous conversations
+- Basic auto-save functionality during conversations
+- Integration with existing ChatUI component
+
+### 3.4 Integration Points
+- Modify existing ChatUI to support loading previous sessions
+- Integrate with current useChat hook workflow
+- Maintain compatibility with existing message rendering (MessageCard, MessageList)
+- Support for tool invocation history preservation
+
+## 4. Technical Specifications
+
+### 4.1 Message Serialization
+Handle UIMessage types with proper JSON serialization:
+- Tool invocations with args and results
+- Reasoning parts from Anthropic
+- File and source attachments
+- Ensure messages can be recreated accurately
+
+### 4.2 User Experience
+- Load previous conversations by clicking on session
+- Auto-save messages as conversation progresses
+- Simple session identification (by first user message or auto-generated)
+- Seamless transition between new and saved chats
+
+## 5. Security & Privacy
+- Row Level Security (RLS) policies for user isolation
+- Proper user authorization for all operations
+- Users can only access their own chat messages
+
+## 6. Implementation Phases
+
+### Phase 1: Core Infrastructure
+- Database schema creation and migration
+- Basic API endpoints for saving/retrieving messages
+- Message serialization/deserialization logic
+- TypeScript types for chat persistence
+
+### Phase 2: Frontend Integration
+- Modify ChatUI to support session loading
+- Simple chat history sidebar or dropdown
+- Auto-save functionality
+- Session restoration capability
+
+## 7. Success Criteria
+- Users can save and restore chat conversations
+- No impact on existing chat performance
+- Messages are accurately preserved with full fidelity
+- Simple and intuitive user interface
+
+## 8. Dependencies
+- Supabase database access
+- Existing user authentication system
+- Current chat components (ChatUI, MessageCard, MessageList)
+- AI SDK integration and UIMessage types
+
+## 9. Constraints
+- Must maintain backward compatibility with current chat system
+- Simple implementation without over-engineering
+- Focus on core persistence functionality only 

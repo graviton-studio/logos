@@ -1,0 +1,65 @@
+<context>
+# Overview
+This document outlines the requirements for a complete refactor of the frontend UI. The goal is to move away from the current navy and dark blue theme to a new design language that is "waxy" and "papyrus-like," resembling a scroll or an old book. The primary color palette will shift to off-white, aiming for a cleaner, more unique, and "Logos"-inspired aesthetic. This refactor aims to enhance user experience by providing a visually distinct and cohesive interface that aligns with the "Logos" and "Word" concepts.
+
+# Core Features (UI Elements to be Refactored)
+- **Global Styles:** Redefine base styles (typography, colors, spacing, iconography) to match the new "papyrus" theme.
+- **Layout System:** Adapt or rebuild the main layout components (header, footer, sidebars, content areas) to reflect the new aesthetic.
+- **Navigation:** Redesign navigation elements (menus, breadcrumbs, tabs) for clarity and thematic consistency.
+- **Forms & Inputs:** Restyle all form elements (buttons, text fields, dropdowns, checkboxes, radio buttons) with the "waxy" feel.
+- **Data Display:** Update components for displaying data (tables, lists, cards) to fit the new design.
+- **Modals & Popovers:** Ensure all overlays and temporary views adhere to the new theme.
+- **Iconography:** Select or design a new set of icons that complement the "papyrus" and "Logos" theme.
+- **Branding Elements:** Update logos, favicons, and any other brand-specific visuals.
+
+# User Experience
+- **Visual Theme:** The UI should evoke a sense of a historical document, manuscript, or ancient scroll. Textures, color palettes, and font choices will be critical.
+- **Color Palette:** Predominantly off-white and cream colors, with earthy tones for accents. Avoid harsh blacks; use dark browns or sepia for text and borders.
+- **Typography:** Select serif or script fonts that enhance the "papyrus" feel. Ensure readability across all devices.
+- **Interactions & Animations:** Subtle animations that mimic page turns or material interactions (e.g., wax seal effects for confirmations) could enhance the theme if implemented tastefully.
+- **Accessibility:** Ensure the new design meets WCAG AA accessibility standards, particularly for color contrast and font legibility.
+</context>
+<PRD>
+# Technical Architecture
+- **CSS Framework/Methodology:** Evaluate current CSS setup (Tailwind CSS in `globals.css`) and decide whether to refactor within it, extend it, or introduce a new system (e.g., CSS Modules, styled-components if a more component-scoped approach is desired).
+- **Component Library:** Assess existing UI components. Decide on a strategy for refactoring them: update styles in place, wrap existing components, or build new ones.
+- **Theming System:** Implement a robust theming system that allows for easy application of the new "papyrus" styles and potential future themes. This will involve updating CSS variables in `globals.css` and potentially introducing new ones.
+- **Asset Management:** Plan for new image assets, fonts, and icons.
+
+# Development Roadmap
+- **Phase 1: Foundation & Core Styles**
+    - Define core color palette, typography, and basic UI elements (buttons, inputs).
+    - Update `globals.css` with new base styles and CSS variables.
+    - Refactor a small, representative section of the application (e.g., a single page or key component set) to validate the new design.
+- **Phase 2: Component Refactoring**
+    - Systematically refactor all existing UI components to the new design language.
+    - Develop any new components required by the new design.
+- **Phase 3: Application-wide Integration & Polish**
+    - Apply the new design to all pages and views within the application.
+    - Conduct thorough testing for visual consistency, responsiveness, and accessibility.
+    - Add subtle animations and interactive elements if desired.
+- **Phase 4: Documentation & Handoff**
+    - Update or create a style guide and component library documentation.
+
+# Logical Dependency Chain
+1.  **Define Core Design Language:** Finalize fonts, primary/secondary/accent colors, border styles, iconography style. This will heavily influence `globals.css`.
+2.  **Update Global Styles:** Implement the core design language in `globals.css` by modifying existing variables and adding new ones.
+3.  **Refactor Shared Layout Components:** Update main application layout (e.g., `AppLayout`, `Sidebar`, `Header`) to use the new styles.
+4.  **Refactor Atomic Components:** Update basic UI elements like buttons, inputs, typography components.
+5.  **Refactor Composite Components:** Update more complex components that are built from atomic components (e.g., forms, cards, tables).
+6.  **Page-by-Page Refactoring:** Go through each page/view and ensure all elements conform to the new design.
+7.  **Theming & Dark Mode (if applicable):** If a dark mode variant of the papyrus theme is desired, implement it after the light mode is stable.
+
+# Risks and Mitigations
+- **Scope Creep:** The refactor could expand beyond UI to include UX changes. Mitigation: Clearly define the scope upfront and stick to visual refactoring initially.
+- **Inconsistent Application:** Ensuring every part of the UI is updated can be challenging. Mitigation: Develop a comprehensive checklist of components and pages; conduct thorough visual QA.
+- **Performance:** New fonts, textures, or effects could impact performance. Mitigation: Optimize assets and test performance regularly.
+- **Accessibility Challenges:** The "papyrus" theme might introduce contrast issues. Mitigation: Continuously test against accessibility guidelines and adjust colors/fonts as needed.
+- **Subjectivity of Aesthetics:** The "waxy" or "papyrus-like" feel can be open to interpretation. Mitigation: Create mood boards and early mockups to align on the visual direction before extensive coding.
+
+# Appendix
+- Mood board for "papyrus" theme (Link or embedded images)
+- Font selections and licenses
+- Icon set specifications
+- Color palette codes (OKLCH, HEX, RGB)
+</PRD> 

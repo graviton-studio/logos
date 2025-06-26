@@ -1,0 +1,7 @@
+services:
+  - type: cron
+    name: token-refresh
+    runtime: python
+    schedule: "0 0 * * *"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python jobs/token_refresh.py"
