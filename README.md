@@ -1,4 +1,4 @@
-# Logos AI Platform
+# Logos
 
 <img src="assests/design.png" alt="design" width="600"/>
 
